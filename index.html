@@ -4,14 +4,19 @@
     <script>
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
+
       if (code) {
-        // Actual redirect to your app with the code
+        // Attempt to redirect to the app using the custom scheme
         window.location.href = `fieldframe://oauth2redirect?code=${code}`;
+
+        // Fallback in case the custom scheme is not handled
+        setTimeout(() => {
+          document.body.innerText = "Unable to open the app. Please ensure the app is installed.";
+        }, 2000);
       } else {
         document.body.innerText = "Authorization code is missing!";
       }
     </script>
   </head>
-  <body>Redirecting to app…</body>
+  <body>Redirecting to the app…</body>
 </html>
-
