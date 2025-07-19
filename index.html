@@ -1,1 +1,17 @@
-<!DOCTYPE html><html><body><h1>Test</h1></body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      if (code) {
+        // Actual redirect to your app with the code
+        window.location.href = `fieldframe://oauth2redirect?code=${code}`;
+      } else {
+        document.body.innerText = "Authorization code is missing!";
+      }
+    </script>
+  </head>
+  <body>Redirecting to app…</body>
+</html>
+
