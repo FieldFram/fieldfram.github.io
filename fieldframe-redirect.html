@@ -9,10 +9,10 @@
         // 1. Try custom scheme redirect
         window.location.href = `fieldframe://oauth2redirect?code=${code}`;
 
-        // 2. Fallback to GitHub page after 1 second
+        // 2. Fallback message after 1.5 seconds
         setTimeout(() => {
-          window.location.href = `https://fieldfram.github.io/fieldframe-redirect/app-link?code=${code}`;
-        }, 1000);
+          document.body.innerText = "App not found. Please install the app.";
+        }, 1500);
       } else {
         document.body.innerText = "Missing authorization code!";
       }
