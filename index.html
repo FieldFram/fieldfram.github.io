@@ -6,17 +6,17 @@
       const code = params.get("code");
 
       if (code) {
-        // Attempt to redirect to the app using the custom scheme
+        // Redirect to the app via custom URL scheme
         window.location.href = `fieldframe://oauth2redirect?code=${code}`;
 
-        // Fallback in case the custom scheme is not handled
+        // Fallback to HTML page if app isn't installed (after 1 second)
         setTimeout(() => {
-          document.body.innerText = "Unable to open the app. Please ensure the app is installed.";
-        }, 2000);
+          window.location.href = `https://fieldfram.github.io/fieldframe-redirect/?code=${code}`;
+        }, 1000);
       } else {
-        document.body.innerText = "Authorization code is missing!";
+        document.body.innerText = "Missing authorization code!";
       }
     </script>
   </head>
-  <body>Redirecting to the app…</body>
+  <body>Redirecting to app...</body>
 </html>
