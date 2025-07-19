@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .hidden { display: none; }
+    .visible { display: block; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+  </style>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+
+    function fallbackDisplay() {
+      document.getElementById("manual").classList.remove("hidden");
+      document.getElementById("authCode").textContent = code || "N/A";
+    }
+
+    if (code) {
+      // Try custom scheme redirect
+      window.location.href = `fieldframe://oauth2redirect?code=${code}`;
+
+      // Fallback after 5 seconds
+      setTimeout(() => {
+        fallbackDisplay();
+      }, 5000);
+    } else {
+      fallbackDisplay();
+    }
+  </script>
+</head>
+<body>
+  <h2>Redirecting to FieldFrame...</h2>
+  <p>If you are not redirected automatically, follow the instructions below.</p>
+
+  <div id="manual" class="hidden">
+    <h3>Manual Authorization Code</h3>
+    <p>Copy this code and paste it into the FieldFrame app:</p>
+    <p><code id="authCode"></code></p>
+    <p>If the app is installed and this page didn't redirect, try opening the app manually.</p>
+  </div>
+</body>
+</html>
