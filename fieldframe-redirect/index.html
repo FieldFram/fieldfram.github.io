@@ -2,26 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting...</title>
+    <title>Test Code Output</title>
+  </head>
+  <body>
+    Code received:
     <script>
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
-
-      if (code) {
-        // Try opening app
-        window.location.href = `fieldframe://oauth2redirect?code=${code}`;
-
-        // Fallback after 1.5 seconds
-        setTimeout(() => {
-          window.location.href = `https://fieldfram.github.io/fieldframe-redirect/app-link/?code=${code}`;
-        }, 1500);
-      } else {
-        document.body.innerText = "Missing authorization code!";
-      }
+      document.body.innerHTML += code ? code : "No code found";
     </script>
-  </head>
-  <body>
-    Redirecting to app...
   </body>
 </html>
-
